@@ -34,6 +34,7 @@ const AddTask = () => {
     descriptionRef.current.value = "";
     dispatch(addTaskActions.displayAddTaskHandler());
     dispatch(addTaskActions.editable())
+    dispatch(addTaskActions.filterTasks({search: ""}));
   };
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const AddTask = () => {
       dateRef.current.value = editableTask.date;
       descriptionRef.current.value = editableTask.description;
     }
-  }, [editableTask]);
+  }, [editableTask, editable]);
 
   return (
     <Card>

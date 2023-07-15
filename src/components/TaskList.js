@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Task from "./Task";
 
 const TaskList = () => {
-  const { taskList } = useSelector((state) => state.addTask);
+  const { taskList, filteredTasks } = useSelector((state) => state.addTask);
 
   const addedTasks = taskList.map((task) => {
     return (
@@ -16,9 +16,20 @@ const TaskList = () => {
       />
     );
   });
+
   return (
     <>
-    { addedTasks }
+    {!filteredTasks && addedTasks }
+    {filteredTasks && filteredTasks.map((task) => {
+    return (
+      <Task
+        title={task.title}
+        date={task.date}
+        description={task.description}
+        key={Math.random()}
+      />
+    );
+  })}
     </>
   );
 };

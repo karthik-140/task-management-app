@@ -11,7 +11,7 @@ const fetchTasks = () => {
 
 const addTaskSlice = createSlice({
   name: "addTask",
-  initialState: { taskList: fetchTasks(), displayAddTask: false, editableTask: null, editable:false },
+  initialState: { taskList: fetchTasks(), displayAddTask: false, editableTask: null, editable:false, filteredTasks: null },
   reducers: {
     addTaskList(state, action) {
       state.taskList = action.payload.add;
@@ -35,6 +35,12 @@ const addTaskSlice = createSlice({
       state.taskList = newList;
       localStorage.setItem("tasks", JSON.stringify(newList));
     },
+    filterTasks(state, action){
+      let query = action.payload.search;
+      state.filteredTasks = state.taskList.filter((task) => {
+        return task.title.toLowerCase().includes(query.toLowerCase());
+      })
+    }
   },
 });
 
