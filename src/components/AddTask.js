@@ -16,6 +16,10 @@ const AddTask = () => {
     const title = titleRef.current.value;
     const date = dateRef.current.value;
     const description = descriptionRef.current.value;
+    if(title === '' || date === '' || description === ''){
+      alert("please add your tasks");
+      return;
+    }
     const obj = { title, date, description };
     if (editableTask && editable) {
       let title = editableTask.title;
@@ -62,6 +66,7 @@ const AddTask = () => {
                 id="title"
                 className="rounded p-2 outline-none"
                 ref={titleRef}
+                required
               />
             </div>
             <div className="flex flex-col flex-1 gap-3">
@@ -72,6 +77,7 @@ const AddTask = () => {
                 id="date"
                 className="rounded  p-2 outline-none"
                 ref={dateRef}
+                required
               />
             </div>
           </div>
@@ -83,6 +89,7 @@ const AddTask = () => {
               id="description"
               className="rounded pb-20 p-2 outline-none"
               ref={descriptionRef}
+              required
             />
           </div>
           <button
